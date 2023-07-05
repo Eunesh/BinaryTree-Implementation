@@ -25,20 +25,30 @@ class BinaryTree {
     }
   }
 
+  // Checking left node and if left node is null add newNode to that left node
+  checkNodeLeft(node, newNode) {
+    if (node.left === null) {
+      node.left = newNode;
+    } else {
+      this.addNewDataNode(node.left, newNode); // If no left node having null value found call the same method recursively untill null node is found at left side
+    }
+  }
+
+  // Checking right node and if left node is null add newNode to that left node
+  checkNodeRight(node, newNode) {
+    if (node.right === null) {
+      node.right = newNode;
+    } else {
+      this.addNewDataNode(node.right, newNode); // If no left node having null value found call the same method recursively untill null node is found at left side
+    }
+  }
+
   // This method will add the new data at the appropriate position in the tree
   addNewDataNode(node, newNode) {
     if (newNode.data < node.data) {
-      if (node.left === null) {
-        node.left = newNode;
-      } else {
-        this.addNewDataNode(node.left, newNode); // If no left node having null value found call the same method recursively untill null node is found at left side
-      }
+      this.checkNodeLeft(node, newNode);
     } else {
-      if (node.right === null) {
-        node.right = newNode;
-      } else {
-        this.addNewDataNode(node.right, newNode);
-      }
+      this.checkNodeRight(node, newNode);
     }
   }
 
@@ -53,6 +63,8 @@ let BT = new BinaryTree();
 BT.InsertNewData(25);
 BT.InsertNewData(30);
 BT.InsertNewData(17);
+BT.InsertNewData(35);
+BT.InsertNewData(27);
 
 BT.retrieveData();
 
